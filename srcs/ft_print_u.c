@@ -6,18 +6,16 @@
 /*   By: afoulqui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 10:44:31 by afoulqui          #+#    #+#             */
-/*   Updated: 2020/02/20 09:51:36 by afoulqui         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:36:45 by afoulqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_get_zero_u(t_flags *flags, int *len, unsigned int nb)
+int		ft_get_zero_u(t_flags *flags, int *len, unsigned long int nb)
 {
-	int		        zero;
+	int					zero;
 
 	zero = 0;
-	if (flags->zero == 0)
-		return (0);
-	if (flags->precision == 0 && nb == 0)
+	if (flags->precision == 1 && flags->nb_precision == 0 && nb == 0)
 	{
 		*len = 0;
 		return (0);
@@ -27,23 +25,53 @@ int		ft_get_zero_u(t_flags *flags, int *len, unsigned int nb)
 	return (zero);
 }
 
+int		ft_find_ulen(unsigned long int nb)
+{
+	int					len;
+
+	len = 0;
+	if (nb == 0)
+		len += 1;
+	while (nb > 0)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
+}
+
+void	ft_putnbr_u(unsigned long int nb)
+{
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	if (nb <= 9)
+		ft_putchar(nb + '0');
+}
+
 int		ft_print_u(va_list *args, t_flags *flags)
 {
-	unsigned int    nb;
-	int 	        len;
-	int		        zero;
-	int		        space;
+	unsigned long int	nb;
+	int					len;
+	int					zero;
+	int					space;
+	char				c;
 
-	nb = (long)va_arg(*args, unsigned int);
-	len = ft_find_intlen(nb);
+	c = ' ';
+	if (flags->zero == 1)
+		c = '0';
+	nb = va_arg(*args, unsigned int);
+	len = ft_find_ulen(nb);
 	zero = ft_get_zero_u(flags, &len, nb);
 	space = ft_get_space(flags, len + zero);
-	if (flags->zero == 0 || flags->left == 0)
-		ft_putnchar(' ', space);
-	ft_putnchar('0', (flags->zero) ? zero : space);
+	if (flags->left == 0)
+		ft_putnchar(c, space);
+	ft_putnchar('0', zero);
 	if (len > 0)
-		ft_putnbr((int)nb);
+		ft_putnbr_u(nb);
 	if (flags->left == 1)
-		ft_putnchar(' ', space);
+		ft_putnchar(c, space);
 	return (len + zero + space);
 }

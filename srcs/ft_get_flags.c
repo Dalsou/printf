@@ -6,7 +6,7 @@
 /*   By: afoulqui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 09:29:20 by afoulqui          #+#    #+#             */
-/*   Updated: 2020/02/20 09:46:19 by afoulqui         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:25:33 by afoulqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void		ft_flag_width(char *str, t_flags *flags, va_list *list)
 		if (ft_find_index("123456789*", str[i]) != -1 && str[i - 1] != '.')
 		{
 			flags->width = 1;
-			flags->nb_width = ft_find_nb(str, list);
+			break ;
 		}
 		i++;
 	}
+	if (flags->width == 1)
+		flags->nb_width = ft_find_nb(&str[i], list);
 	if (flags->nb_width < 0)
 	{
 		flags->nb_width *= -1;
@@ -41,7 +43,9 @@ int			ft_flag_zero(char *str)
 	while (str[i])
 	{
 		if (str[i] == '0' && (ft_find_index("0123456789.", str[i - 1]) == -1))
+		{
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -72,7 +76,7 @@ void		ft_init_flags(char *str, t_flags *flags, va_list *list)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '.'|| str[i] == '0')
+		if (str[i] == '.')
 		{
 			nb = ft_find_nb(&str[i + 1], list);
 			if (nb < 0)

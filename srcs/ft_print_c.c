@@ -6,9 +6,23 @@
 /*   By: afoulqui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:32:58 by afoulqui          #+#    #+#             */
-/*   Updated: 2020/02/20 09:47:30 by afoulqui         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:38:38 by afoulqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnchar(char c, int n)
+{
+	while (n > 0)
+	{
+		write(1, &c, 1);
+		n--;
+	}
+}
 
 int		ft_print_c(va_list *args, t_flags *flags)
 {
@@ -17,7 +31,7 @@ int		ft_print_c(va_list *args, t_flags *flags)
 
 	c = va_arg(*args, int);
 	len = 0;
-	if (flags->width == 1)
+	if (flags->width == 1 && flags->nb_width > 0)
 	{
 		len = flags->nb_width;
 		if (flags->left == 1)

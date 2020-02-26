@@ -6,7 +6,7 @@
 /*   By: afoulqui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:39:01 by afoulqui          #+#    #+#             */
-/*   Updated: 2020/02/20 09:49:15 by afoulqui         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:26:32 by afoulqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,16 @@ int		ft_find_nb(char *str, va_list *list)
 {
 	int		nb;
 	int		i;
+	int		neg;
 
 	nb = 0;
 	i = 0;
-	if (str[i] == '-' )
+	neg = 1;
+	if (str[i] == '-')
+	{
+		neg *= -1;
 		i++;
+	}
 	if (str[i] == '*')
 		nb = va_arg(*list, int);
 	else if (ft_find_index("0123456789", str[i]) != -1)
@@ -63,5 +68,5 @@ int		ft_find_nb(char *str, va_list *list)
 			i++;
 		}
 	}
-	return (nb);
+	return (nb * neg);
 }

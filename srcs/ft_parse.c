@@ -20,22 +20,17 @@ void	ft_init_functions(int (*functions[]) (va_list *, t_flags *))
 	functions[5] = ft_print_u;
 	functions[6] = ft_print_x;
 	functions[7] = ft_print_x2;
+	functions[8] = ft_print_prct;
 }
 
 int		ft_parse(char *str, va_list *list, int *i)
 {
-	int			(*functions[8]) (va_list *, t_flags *);
+	int			(*functions[9]) (va_list *, t_flags *);
 	t_flags		flags;
 	char		*tmp;
 	int			len;
 	int			j;
 
-	if (str[0] == '%')
-	{
-		write(1, "%%", 1);
-		*i += 1;
-		return (1);
-	}
 	j = ft_find_end(str, TYPE_FIELD);
 	if ((j == -1) || !(tmp = ft_strndup(str, j + 1)))
 		return (0);

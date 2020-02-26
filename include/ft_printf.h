@@ -6,7 +6,7 @@
 /*   By: afoulqui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 11:32:58 by afoulqui          #+#    #+#             */
-/*   Updated: 2020/02/06 10:42:12 by afoulqui         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:50:31 by afoulqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define TYPE_FIELD "cspdiuxX"
+# define TYPE_FIELD "cspdiuxX%"
 
 typedef struct	s_flags
 {
@@ -42,29 +42,31 @@ int				ft_parse(char *str, va_list *list, int *i);
 int				ft_find_index(char *str, char element);
 int				ft_find_end(char *s1, char *s2);
 int				ft_find_nb(char *str, va_list *list);
-int				ft_find_intlen(int nb);
 int				ft_print_i(va_list *args, t_flags *flags);
 int				ft_print_d(va_list *args, t_flags *flags);
 void			ft_putchar(char c);
 void			ft_putnchar(char c, int n);
 void			ft_putstr(char *str);
 void			ft_putnstr(char *str, int n);
-void			ft_putnbr(int n);
+void			ft_putnbr(long nbr);
 int				ft_print_c(va_list *args, t_flags *flags);
 int				ft_print_s(va_list *args, t_flags *flags);
 int				ft_find_strlen(char *str, t_flags *flags);
-int				ft_get_zero(t_flags *flags, int *len, int nb);
+int				ft_get_zero(t_flags *flags, int *len, long nb);
 int				ft_get_space(t_flags *flags, int len);
 int				ft_print_d(va_list *args, t_flags *flags);
-void			ft_putnbr(int n);
-int     		ft_find_intlen(int nb);
-int    			ft_print_p(va_list *args, t_flags *flags);
-int    			ft_find_lenbase(long nb, int base);
-int				ft_putnbr_base(long n, char *base);
-int				ft_get_zero_u(t_flags *flags, int *len, unsigned int nb);
+int				ft_find_intlen(long nb);
+int				ft_print_p(va_list *args, t_flags *flags);
+int				ft_find_lenbase(long nb, int base);
+void			ft_putnbr_base(unsigned long int nb, char *base);
+int				ft_get_zero_u(t_flags *flags, int *len, unsigned long int nb);
+int				ft_convert_hex(unsigned long int nb, char *base,
+				t_flags *flags);
 int				ft_print_u(va_list *args, t_flags *flags);
-int				ft_u_to_hex(unsigned  int nb, char *base, t_flags *flags);
 int				ft_print_x(va_list *args, t_flags *flags);
 int				ft_print_x2(va_list *args, t_flags *flags);
+void			ft_putnbr_u(unsigned long int nbr);
+int				ft_find_ulen(unsigned long int nb);
+int				ft_print_prct(va_list *args, t_flags *flags);
 
 #endif

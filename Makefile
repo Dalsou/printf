@@ -25,8 +25,7 @@ SRCS_FILES		=	ft_printf.c \
 						ft_print_p.c \
 						ft_print_u.c \
 						ft_print_x.c \
-						ft_char_utils.c \
-						ft_int_utils.c
+						ft_print_prct.c
 					
 SRCS			=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
